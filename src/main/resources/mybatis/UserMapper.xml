@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+    <resultMap id="userMap" type="com.example.demo.entity.UserEntity">
+        <id property="userId" column="ID_USER" jdbcType="VARCHAR"/>
+        <result property="userName" column="NAME_USER" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="createDate" column="CRT_DATE" jdbcType="TIMESTAMP"/>
+        <result property="remarks" column="REMARKS" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="columnsAll">
+        ID_USER,NAME_USER,PASSWORD,CRT_DATE,REMARKS
+    </sql>
+
+    <select id="findByWhere" resultMap="userMap">
+        select
+        <include refid="columnsAll"/>
+        from demo_user
+        <where>
+            <if test="entity != null">
+                <if test="entity.userId != null and entity.userId != ''">
+                    and ID_USER = #{entity.userId,jdbcType=VARCHAR}
+                </if>
+                <if test="entity.userName != null and entity.userName != ''">
+                    and NAME_USER = #{entity.userName,jdbcType=VARCHAR}
+                </if>
+                <if test="entity.password != null and entity.password != ''">
+                    and PASSWORD = #{entity.password,jdbcType=VARCHAR}
+                </if>
+                <if test="entity.createDate != null">
+                    and CRT_DATE = #{entity.createDate,jdbcType=TIMESTAMP}
+                </if>
+                <if test="entity.remarks != null">
+                    and REMARKS = #{entity.remarks,jdbcType=VARCHAR}
+                </if>
+            </if>
+        </where>
+        order by CRT_DATE DESC
+    </select>
+
+    <insert id="insert">
+        insert into demo_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user.userId != null and user.userId != ''">
+                ID_USER,
+            </if>
+            <if test="user.userName != null and user.userName != ''">
+                NAME_USER,
+            </if>
+            <if test="user.password != null and user.password != ''">
+                PASSWORD,
+            </if>
+            <if test="user.password != null">
+                CRT_DATE,
+            </if>
+            <if test="user.remarks != null">
+                REMARKS
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="user.userId != null and user.userId != ''">
+                #{user.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="user.userName != null and user.userName != ''">
+                #{user.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="user.password != null and user.password != ''">
+                #{user.password,jdbcType=VARCHAR},
+            </if>
+            <if test="user.createDate != null">
+                #{user.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="user.remarks != null">
+                #{user.remarks,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <select id="checkForPresence" resultType="INTEGER">
+        select count(1)
+        from demo_user
+        where NAME_USER = #{userName}
+    </select>
+
+    <update id="update">
+        update demo_user
+        <set>
+            <if test="user.userName != null and user.userName != ''">
+                NAME_USER = #{user.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="user.password != null and user.password != ''">
+                PASSWORD = #{user.password,jdbcType=VARCHAR},
+            </if>
+            <if test="user.remarks != null">
+                REMARKS = #{user.remarks,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where ID_USER = #{user.userId}
+    </update>
+</mapper>
