@@ -41,7 +41,7 @@ public class UserControler {
     }
 
     /**
-     * 查询
+     * 查询（可根据条件查询）
      *
      * @param entity
      * @return
