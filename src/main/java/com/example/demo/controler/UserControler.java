@@ -53,7 +53,7 @@ public class UserControler {
     }
 
     /**
-     * 修改用户信息
+     * 通过主键id修改用户信息
      *
      * @param entity
      * @return
