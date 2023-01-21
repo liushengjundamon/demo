@@ -21,7 +21,7 @@ public class UserControler {
     private UserService userService;
 
     /**
-     * 新增用户
+     * 添加用户
      *
      * @param entity
      * @return
