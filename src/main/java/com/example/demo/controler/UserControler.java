@@ -21,7 +21,7 @@ public class UserControler {
     private UserService userService;
 
     /**
-     * 添加用户
+     * 新增
      *
      * @param entity
      * @return
@@ -41,7 +41,7 @@ public class UserControler {
     }
 
     /**
-     * 查询（可根据条件查询）
+     * 条件查询
      *
      * @param entity
      * @return
@@ -53,7 +53,7 @@ public class UserControler {
     }
 
     /**
-     * 通过主键id修改用户信息
+     * 修改
      *
      * @param entity
      * @return
