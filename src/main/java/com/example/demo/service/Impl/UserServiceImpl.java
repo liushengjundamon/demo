@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     /**
-     * 新增用户
+     * 新增
      *
      * @param entity
      * @return
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 获取实体
+     * 条件查询
      *
      * @param entity
      * @return
@@ -55,12 +55,22 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * 修改用户信息
+     * 修改
      *
      * @param entity
      * @return
      */
     public int update(UserEntity entity) {
         return userMapper.update(entity);
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param list
+     * @return
+     */
+    public int delete(List<String> list) {
+        return userMapper.delete(list);
     }
 }

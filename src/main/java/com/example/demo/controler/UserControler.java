@@ -66,4 +66,18 @@ public class UserControler {
         }
         return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "修改失败！");
     }
+
+    /**
+     * 批量删除
+     *
+     * @param list
+     * @return
+     */
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Object> delete(@RequestBody List<String> list) {
+        if (userService.delete(list) > 0) {
+            return new ResponseEntity<>(DemoResponseCode.OK, "删除成功！");
+        }
+        return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "删除失败！");
+    }
 }

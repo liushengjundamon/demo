@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     /**
-     * 新增用户
+     * 新增
      *
      * @param entity
      * @return
@@ -22,7 +22,7 @@ public interface UserMapper {
     int insert(@Param("user") UserEntity entity);
 
     /**
-     * 获取实体
+     * 条件查询
      *
      * @param entity
      * @return
@@ -38,10 +38,18 @@ public interface UserMapper {
     int checkForPresence(@Param("userName") String userName);
 
     /**
-     * 修改用户信息
+     * 修改
      *
      * @param entity
      * @return
      */
     int update(@Param("user") UserEntity entity);
+
+    /**
+     * 批量删除
+     *
+     * @param strings
+     * @return
+     */
+    int delete(@Param("list") List<String> strings);
 }

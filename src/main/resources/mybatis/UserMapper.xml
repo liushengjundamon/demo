@@ -100,4 +100,13 @@
         </set>
         where ID_USER = #{user.userId}
     </update>
+
+    <delete id="delete">
+        delete from demo_user
+        where ID_USER in (
+        <foreach collection="list" item="userId" separator=",">
+            #{userId}
+        </foreach>
+        )
+    </delete>
 </mapper>

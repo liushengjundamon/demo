@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface UserService {
     /**
-     * 新增用户
+     * 新增
      *
      * @param entity
      * @return
@@ -17,7 +17,7 @@ public interface UserService {
     int insert(UserEntity entity);
 
     /**
-     * 获取实体
+     * 条件查询
      *
      * @param entity
      * @return
@@ -33,10 +33,18 @@ public interface UserService {
     int checkForPresence(String userName);
 
     /**
-     * 修改用户信息
+     * 修改
      *
      * @param entity
      * @return
      */
     int update(UserEntity entity);
+
+    /**
+     * 批量删除
+     *
+     * @param list
+     * @return
+     */
+    int delete(List<String> list);
 }
