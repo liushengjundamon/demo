@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户信息controler
@@ -79,5 +82,29 @@ public class UserControler {
             return new ResponseEntity<>(DemoResponseCode.OK, "删除成功！");
         }
         return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "删除失败！");
+    }
+
+    /**
+     * 练习Lambda表达式
+     *
+     * @return
+     */
+    @GetMapping(value = "/testLambda")
+    public ResponseEntity<Object> testLambda() {
+        //获取所有数据（返回map）
+        List<Map<String, Object>> allData = userService.getAllData();
+        List<Map<String, Object>> newAllData = new LinkedList<>();
+
+        //Lambda遍历
+        allData.forEach(x -> {
+            Map<String, Object> map = new HashMap<>();
+            x.forEach((k, v) -> {
+                map.put(k, v);
+            });
+            map.put("Lambda表达式测试", "测试成功！");
+            newAllData.add(map);
+        });
+
+        return new ResponseEntity<>(newAllData);
     }
 }

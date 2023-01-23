@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户mapper
@@ -52,4 +53,11 @@ public interface UserMapper {
      * @return
      */
     int delete(@Param("list") List<String> strings);
+
+    /**
+     * 获取所有数据（返回map）
+     *
+     * @return
+     */
+    List<Map<String,Object>> getAllData();
 }

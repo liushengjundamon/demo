@@ -11,6 +11,14 @@
         <result property="remarks" column="REMARKS" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="allDataMap" type="java.util.Map">
+        <id property="userId" column="ID_USER" jdbcType="VARCHAR"/>
+        <result property="userName" column="NAME_USER" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="createDate" column="CRT_DATE" jdbcType="TIMESTAMP"/>
+        <result property="remarks" column="REMARKS" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="columnsAll">
         ID_USER,NAME_USER,PASSWORD,CRT_DATE,REMARKS
     </sql>
@@ -109,4 +117,10 @@
         </foreach>
         )
     </delete>
+
+    <select id="getAllData" resultMap="allDataMap">
+        select
+        <include refid="columnsAll"/>
+        from demo_user
+    </select>
 </mapper>

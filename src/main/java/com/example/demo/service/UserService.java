@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.UserEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户信息servcie接口
@@ -47,4 +48,11 @@ public interface UserService {
      * @return
      */
     int delete(List<String> list);
+
+    /**
+     * 获取所有数据（返回map）
+     *
+     * @return
+     */
+    List<Map<String,Object>> getAllData();
 }

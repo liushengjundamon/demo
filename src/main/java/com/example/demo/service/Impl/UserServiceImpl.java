@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户信息servcie实现类
@@ -72,5 +73,14 @@ public class UserServiceImpl implements UserService {
      */
     public int delete(List<String> list) {
         return userMapper.delete(list);
+    }
+
+    /**
+     * 获取所有数据（返回map）
+     *
+     * @return
+     */
+    public List<Map<String,Object>> getAllData() {
+        return userMapper.getAllData();
     }
 }
