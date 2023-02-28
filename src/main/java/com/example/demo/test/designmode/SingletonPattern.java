@@ -1,4 +1,4 @@
-package com.example.demo.designmode;
+package com.example.demo.test.designmode;
 
 /**
  * 单例模式
