@@ -7,7 +7,9 @@ import com.example.demo.util.DemoResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -106,5 +108,41 @@ public class UserControler {
         });
 
         return new ResponseEntity<>(newAllData);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/upload")
+    public ResponseEntity<Object> file(MultipartFile file) throws IOException {
+        System.out.println(file.getOriginalFilename());//文件名
+        System.out.println(file.getContentType());//文件类型
+        System.out.println(file.getSize());//文件大小
+        System.out.println(file.getInputStream());//文件的输入流
+
+        //获得文件上传的路径
+        //String path = ResourceUtils.getURL("classpath:").getPath() + "/static/files";
+        String path = "F:\\测试文件上传";
+
+        System.out.println(path);
+        java.io.File newFile = new java.io.File(path);//由于自定义的实体类和java.io.File重名
+        //文件夹不存在则重建
+        if (!newFile.exists()) {
+            newFile.mkdirs();
+        }
+        //上传
+        String fileName = file.getOriginalFilename();
+        file.transferTo(new java.io.File(newFile, fileName));
+        //将文件上传的url存入数据表中
+//        System.out.println("文件上传成功");
+//        Date date = new Date();
+//        Timestamp time = new Timestamp(date.getTime());//mysql中的日期格式
+//        File file1=new File(fileName,path,time);
+//        fileService.addFile(file1);//调用service方法 将文件信息插入数据库
+        return new ResponseEntity<>(DemoResponseCode.OK, "上传成功！");
     }
 }
