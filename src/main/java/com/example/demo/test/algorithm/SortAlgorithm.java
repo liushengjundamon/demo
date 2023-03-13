@@ -1,6 +1,8 @@
 package com.example.demo.test.algorithm;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * 排序算法
@@ -11,6 +13,13 @@ public class SortAlgorithm {
         int[] arr = {1, 9, 5, 4, 7, 8, 41, 48, 7, 645661};
         bubbleSort(arr);
         System.out.println(Arrays.toString(arr));
+
+        //日期格式化
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = dateFormat.format(date);
+        System.out.println(format);
+
     }
 
     /**
