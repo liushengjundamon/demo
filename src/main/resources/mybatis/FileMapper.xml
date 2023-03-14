@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.FileMapper">
+
+    <insert id="addFile">
+        insert into demo_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entity.fileId != null and entity.fileId !=''">
+                ID_FILE,
+            </if>
+            <if test="entity.fileName != null and entity.fileName !=''">
+                NAME_FILE,
+            </if>
+            <if test="entity.filePath != null and entity.filePath !=''">
+                PATH_FILE,
+            </if>
+            <if test="entity.createDate != null">
+                CRT_DATE
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="entity.fileId != null and entity.fileId !=''">
+                #{entity.fileId,jdbcType=INTEGER},
+            </if>
+            <if test="entity.fileName != null and entity.fileName !=''">
+                #{entity.fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.filePath != null and entity.filePath !=''">
+                #{entity.filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="entity.createDate != null">
+                #{entity.createDate,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+</mapper>
