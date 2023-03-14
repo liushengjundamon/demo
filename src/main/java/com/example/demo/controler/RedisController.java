@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/redis")
-public class RedisControler {
+public class RedisController {
 
     @Autowired
     private RedisUtil redisUtil;

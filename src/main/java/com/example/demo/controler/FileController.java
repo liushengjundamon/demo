@@ -19,7 +19,7 @@ import java.net.URLEncoder;
  */
 @RestController
 @RequestMapping(value = "file")
-public class FileControler {
+public class FileController {
 
     @Autowired
     private FileService fileService;
