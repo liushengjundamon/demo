@@ -1,13 +1,14 @@
 package com.example.demo.controler;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.ResponseEntity;
+import com.example.demo.util.DemoResponseCode;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class MobileCodeController {
             //前台输入的手机号
             params.put("number", mobile);
             //这个模板id对应的是榛子云个人中心的模板id
-            params.put("templateId", 11331);
+            params.put("templateId", 11333);
             //参数占位符,不同的模板有不同的参数个数 目前用的模板有两个参数
             String[] templateParams = new String[2];
             //第一个参数 随机生成的六位验证码
@@ -52,17 +53,16 @@ public class MobileCodeController {
             String result = client.send(params);
             json = JSONObject.parseObject(result);
             if (json.getIntValue("code") != 0) {//发送短信失败
-                return "fail";
+                return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "发送失败！");
             }
             //将验证码存到session中,同时存入创建时间
             //以json存放，这里使用的是阿里的fastjson
-            HttpSession session = request.getSession();
             json = new JSONObject();
             json.put("verifyCode", verifyCode);
             json.put("createTime", System.currentTimeMillis());
             // 将认证码存入SESSION
             request.getSession().setAttribute("verifyCode", json);
-            return "success";
+            return new ResponseEntity<>(DemoResponseCode.OK, "发送成功！");
         } catch (Exception e) {
             e.printStackTrace();
         }
