@@ -28,7 +28,7 @@ public class MobileCodeController {
      * @return
      */
     @GetMapping("/sendSms")
-    public Object sendSms(HttpServletRequest request, String mobile) {
+    public ResponseEntity<Object> sendSms(HttpServletRequest request, String mobile) {
         try {
             JSONObject json = null;
             //生成6位验证码
@@ -57,15 +57,35 @@ public class MobileCodeController {
             }
             //将验证码存到session中,同时存入创建时间
             //以json存放，这里使用的是阿里的fastjson
-            json = new JSONObject();
-            json.put("verifyCode", verifyCode);
-            json.put("createTime", System.currentTimeMillis());
+            //json = new JSONObject();
+            //json.put("verifyCode", verifyCode);
+            //json.put("createTime", System.currentTimeMillis());
             // 将认证码存入SESSION
-            request.getSession().setAttribute("verifyCode", json);
+            request.getSession().setAttribute("verifyCode", verifyCode);
             return new ResponseEntity<>(DemoResponseCode.OK, "发送成功！");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    /**
+     * 验证码检测
+     *
+     * @param request
+     * @param inputCode
+     * @return
+     */
+    @GetMapping("/register")
+    public ResponseEntity<Object> loginCheck(HttpServletRequest request, String inputCode) {
+
+        //存在session里的手机验证码
+        String sessionCode = (String) request.getSession().getAttribute("verifyCode");
+        //校验验证码是否正确
+        if (inputCode == null || !inputCode.equals(sessionCode)) {
+            return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "验证码错误！");
+        }
+        return new ResponseEntity<>(DemoResponseCode.OK, "验证通过！");
+    }
+
 }
