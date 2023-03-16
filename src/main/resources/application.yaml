@@ -1,6 +1,22 @@
 server:
   port: 8080
 spring:
+  mail:
+    default-encoding: utf-8
+    host: smtp.163.com
+    username: liushengjun97@163.com
+    password: JEXYRMLTSLRGDWNE
+    port: 465
+    properties:
+      mail:
+        #配置SSL 加密工厂
+        smtp:
+          ssl:
+            #本地测试，先放开ssl
+            enable: true
+            required: true
+          #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
+        debug: true
   redis:
     host: localhost
     database: 1
