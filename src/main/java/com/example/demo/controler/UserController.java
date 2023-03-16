@@ -1,7 +1,9 @@
 package com.example.demo.controler;
 
+import com.example.demo.entity.MailEntity;
 import com.example.demo.entity.ResponseEntity;
 import com.example.demo.entity.UserEntity;
+import com.example.demo.service.SendMailService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.DemoResponseCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private SendMailService sendMailService;
 
     /**
      * 新增
@@ -65,6 +69,12 @@ public class UserController {
     public ResponseEntity<Object> update(@RequestBody UserEntity entity) {
         Assert.hasText(entity.getUserId(), "用户id不能为空！");
         if (userService.update(entity) > 0) {
+            //修改成功通知我
+            MailEntity mailEntity = new MailEntity();
+            mailEntity.setSendTo("liushengjun97@163.com,1132373926@qq.com");
+            mailEntity.setText("您的账号(" + entity.getUserId() + ")数据已被更改！，请前往数据库查看。");
+            mailEntity.setSubject("账号密码变动提醒");
+            sendMailService.sendSimpleMail(mailEntity);
             return new ResponseEntity<>(DemoResponseCode.OK, "修改成功！");
         }
         return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "修改失败！");
