@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
         return userMapper.insert(entity);
     }
 
+
     /**
      * 条件查询
      *
@@ -92,5 +93,21 @@ public class UserServiceImpl implements UserService {
      */
     public List<UserExcelVO> findUserExcelData(UserExcelVO vo) {
         return userMapper.findUserExcelData(vo);
+    }
+
+    /**
+     * 批量插入数据
+     *
+     * @param list
+     * @return
+     */
+    @Override
+    public int batchInsert(List<UserExcelVO> list) {
+        //每一条生成主键id
+        list.forEach(x -> {
+            x.setUserId(IDGenerator.getPid());
+            x.setCreateDate(new Date());
+        });
+        return userMapper.batchInsert(list);
     }
 }

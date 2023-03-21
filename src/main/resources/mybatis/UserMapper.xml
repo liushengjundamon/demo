@@ -157,4 +157,25 @@
         <include refid="columnsAll"/>
         from demo_user
     </select>
+
+    <!--批量插入数据-->
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into demo_user(
+        ID_USER,
+        NAME_USER,
+        PASSWORD,
+        CRT_DATE,
+        REMARKS
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.userId},
+            #{item.userName},
+            #{item.password},
+            #{item.createDate},
+            #{item.remarks}
+            )
+        </foreach>
+    </insert>
 </mapper>

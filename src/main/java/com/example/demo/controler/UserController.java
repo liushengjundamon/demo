@@ -123,7 +123,9 @@ public class UserController {
 
     /**
      * 导出用户数据
-     * Excel
+     *
+     * @param response
+     * @param vo
      */
     @GetMapping(value = "exportExcel")
     public void export(HttpServletResponse response, UserExcelVO vo) {
@@ -132,5 +134,26 @@ public class UserController {
         List<UserExcelVO> list = userService.findUserExcelData(vo);
         //导出操作
         ExcelUtil.exportExcel(list, "用户信息", "账号密码", UserExcelVO.class, "我的账户信息.xls", response);
+    }
+
+    /**
+     * 导入用户数据
+     *
+     * @param filePath
+     * @return
+     */
+    @GetMapping("importExcel")
+    public ResponseEntity<Object> importExcel(String filePath) {
+
+        //String filePath = "C:\\Users\\liush\\Desktop\\账号.xls";
+        //解析excel，
+        List<UserExcelVO> list = ExcelUtil.importExcel(filePath, 1, 1, UserExcelVO.class);
+        //也可以使用MultipartFile,使用 FileUtil.importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass)导入
+        System.out.println("导入数据一共【" + list.size() + "】行");
+        //批量插入数据
+        if (userService.batchInsert(list) > 0) {
+            return new ResponseEntity<>(DemoResponseCode.OK, "新增成功！");
+        }
+        return new ResponseEntity<>(DemoResponseCode.DO_FAIL, "新增失败！");
     }
 }

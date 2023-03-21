@@ -64,4 +64,12 @@ public interface UserService {
      * @return
      */
     List<UserExcelVO> findUserExcelData(UserExcelVO vo);
+
+    /**
+     * 批量插入数据
+     *
+     * @param list
+     * @return
+     */
+    int batchInsert(List<UserExcelVO> list);
 }

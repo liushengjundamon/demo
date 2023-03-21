@@ -68,4 +68,12 @@ public interface UserMapper {
      * @return
      */
     List<UserExcelVO> findUserExcelData(@Param("vo") UserExcelVO vo);
+
+    /**
+     * 批量插入数据
+     *
+     * @param list
+     * @return
+     */
+    int batchInsert(@Param("list") List<UserExcelVO> list);
 }
