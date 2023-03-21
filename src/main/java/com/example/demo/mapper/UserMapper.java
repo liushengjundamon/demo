@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.UserEntity;
+import com.example.demo.excelVO.UserExcelVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -59,5 +60,12 @@ public interface UserMapper {
      *
      * @return
      */
-    List<Map<String,Object>> getAllData();
+    List<Map<String, Object>> getAllData();
+
+    /**
+     * 获取导出excel数据
+     *
+     * @return
+     */
+    List<UserExcelVO> findUserExcelData(@Param("vo") UserExcelVO vo);
 }

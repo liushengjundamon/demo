@@ -3,13 +3,16 @@ package com.example.demo.controler;
 import com.example.demo.entity.MailEntity;
 import com.example.demo.entity.ResponseEntity;
 import com.example.demo.entity.UserEntity;
+import com.example.demo.excelVO.UserExcelVO;
 import com.example.demo.service.SendMailService;
 import com.example.demo.service.UserService;
 import com.example.demo.util.DemoResponseCode;
+import com.example.demo.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -116,5 +119,18 @@ public class UserController {
         });
 
         return new ResponseEntity<>(newAllData);
+    }
+
+    /**
+     * 导出用户数据
+     * Excel
+     */
+    @GetMapping(value = "exportExcel")
+    public void export(HttpServletResponse response, UserExcelVO vo) {
+
+        //查出要导出的数据
+        List<UserExcelVO> list = userService.findUserExcelData(vo);
+        //导出操作
+        ExcelUtil.exportExcel(list, "用户信息", "账号密码", UserExcelVO.class, "我的账户信息.xls", response);
     }
 }

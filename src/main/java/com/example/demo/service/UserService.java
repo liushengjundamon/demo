@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.UserEntity;
+import com.example.demo.excelVO.UserExcelVO;
 
 import java.util.List;
 import java.util.Map;
@@ -54,5 +55,13 @@ public interface UserService {
      *
      * @return
      */
-    List<Map<String,Object>> getAllData();
+    List<Map<String, Object>> getAllData();
+
+    /**
+     * 获取导出excel数据
+     *
+     * @param vo
+     * @return
+     */
+    List<UserExcelVO> findUserExcelData(UserExcelVO vo);
 }

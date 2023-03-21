@@ -19,6 +19,14 @@
         <result property="remarks" column="REMARKS" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="userExcelMap" type="com.example.demo.excelVO.UserExcelVO">
+        <id property="userId" column="ID_USER" jdbcType="VARCHAR"/>
+        <result property="userName" column="NAME_USER" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="createDate" column="CRT_DATE" jdbcType="TIMESTAMP"/>
+        <result property="remarks" column="REMARKS" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="columnsAll">
         ID_USER,NAME_USER,PASSWORD,CRT_DATE,REMARKS
     </sql>
@@ -43,6 +51,32 @@
                 </if>
                 <if test="entity.remarks != null">
                     and REMARKS = #{entity.remarks,jdbcType=VARCHAR}
+                </if>
+            </if>
+        </where>
+        order by CRT_DATE DESC
+    </select>
+
+    <select id="findUserExcelData" resultMap="userExcelMap">
+        select
+        <include refid="columnsAll"/>
+        from demo_user
+        <where>
+            <if test="vo != null">
+                <if test="vo.userId != null and vo.userId != ''">
+                    and ID_USER = #{vo.userId,jdbcType=VARCHAR}
+                </if>
+                <if test="vo.userName != null and vo.userName != ''">
+                    and NAME_USER = #{vo.userName,jdbcType=VARCHAR}
+                </if>
+                <if test="vo.password != null and vo.password != ''">
+                    and PASSWORD = #{vo.password,jdbcType=VARCHAR}
+                </if>
+                <if test="vo.createDate != null">
+                    and CRT_DATE = #{vo.createDate,jdbcType=TIMESTAMP}
+                </if>
+                <if test="vo.remarks != null">
+                    and REMARKS = #{vo.remarks,jdbcType=VARCHAR}
                 </if>
             </if>
         </where>

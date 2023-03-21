@@ -1,5 +1,6 @@
 package com.example.demo.service.Impl;
 
+import com.example.demo.excelVO.UserExcelVO;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.service.UserService;
@@ -80,7 +81,16 @@ public class UserServiceImpl implements UserService {
      *
      * @return
      */
-    public List<Map<String,Object>> getAllData() {
+    public List<Map<String, Object>> getAllData() {
         return userMapper.getAllData();
+    }
+
+    /**
+     * 获取导出excel数据
+     *
+     * @return
+     */
+    public List<UserExcelVO> findUserExcelData(UserExcelVO vo) {
+        return userMapper.findUserExcelData(vo);
     }
 }
