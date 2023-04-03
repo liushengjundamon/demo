@@ -1,0 +1,11 @@
+package com.example.demo.test.thread;
+
+public class ThreadTwo implements Runnable {
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(Thread.currentThread().getName() + ":被执行了！");
+        }
+    }
+}
