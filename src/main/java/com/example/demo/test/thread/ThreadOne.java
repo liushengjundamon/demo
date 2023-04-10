@@ -5,7 +5,12 @@ public class ThreadOne extends Thread {
     @Override
     public void run() {
         for (int i = 0; i < 100; i++) {
-            System.out.println(this.getName()+"被执行了！");
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+            System.out.println(Thread.currentThread().getName() + "**********被执行了！");
         }
     }
 }
