@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserDealMapper">
+
+    <resultMap id="userDealMap" type="com.example.demo.entity.UserDealEntity">
+        <id property="userId" column="ID_USER" jdbcType="VARCHAR"/>
+        <result property="userName" column="NAME_USER" jdbcType="VARCHAR"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="createDate" column="CRT_DATE" jdbcType="TIMESTAMP"/>
+        <result property="udtDate" column="UDT_DATE" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="columnsAll">
+        ID_USER,NAME_USER,PASSWORD,CRT_DATE,UDT_DATE
+    </sql>
+
+    <insert id="insert">
+        insert into deal_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userDeal.userId != null and userDeal.userId != ''">
+                ID_USER,
+            </if>
+            <if test="userDeal.userName != null and userDeal.userName != ''">
+                NAME_USER,
+            </if>
+            <if test="userDeal.password != null and userDeal.password != ''">
+                PASSWORD,
+            </if>
+            <if test="userDeal.createDate != null">
+                CRT_DATE,
+            </if>
+            <if test="userDeal.udtDate != null">
+                UDT_DATE
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="userDeal.userId != null and userDeal.userId != ''">
+                #{userDeal.userId,jdbcType=VARCHAR},
+            </if>
+            <if test="userDeal.userName != null and userDeal.userName != ''">
+                #{userDeal.userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userDeal.password != null and userDeal.password != ''">
+                #{userDeal.password,jdbcType=VARCHAR},
+            </if>
+            <if test="userDeal.createDate != null">
+                #{userDeal.createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userDeal.udtDate != null">
+                #{userDeal.udtDate,jdbcType=TIMESTAMP}
+            </if>
+        </trim>
+    </insert>
+
+</mapper>
