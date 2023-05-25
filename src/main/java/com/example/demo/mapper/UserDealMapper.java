@@ -18,4 +18,12 @@ public interface UserDealMapper {
      * @return
      */
     int insert(@Param("userDeal") UserDealEntity entity);
+
+    /**
+     * 检查用户名是否重复
+     *
+     * @param userName
+     * @return
+     */
+    int checkRepetition(@Param("userName") String userName);
 }

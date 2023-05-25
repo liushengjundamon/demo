@@ -53,4 +53,9 @@
         </trim>
     </insert>
 
+    <select id="checkRepetition" resultType="Integer">
+        select count(*) from deal_user
+        where NAME_USER = #{userName}
+    </select>
+
 </mapper>

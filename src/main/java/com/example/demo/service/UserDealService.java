@@ -13,4 +13,12 @@ public interface UserDealService {
      * @return
      */
     int insert(UserDealEntity entity);
+
+    /**
+     * 检查用户名是否存在
+     *
+     * @param userName
+     * @return
+     */
+    int checkRepetition(String userName);
 }

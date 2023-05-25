@@ -32,6 +32,12 @@ public class UserDealController {
 
         Assert.hasText(entity.getUserName(), "用户名不能为空！");
         Assert.hasText(entity.getPassword(), "密码不能为空！");
+
+        //用户名重复校验
+        if (userDealService.checkRepetition(entity.getUserName()) > 0) {
+            return new ResponseEntity<>(DemoResponseCode.EXIST, "用户名已存在！");
+        }
+
         if (userDealService.insert(entity) > 0) {
             return new ResponseEntity<>(DemoResponseCode.OK, "新增成功！");
         }
