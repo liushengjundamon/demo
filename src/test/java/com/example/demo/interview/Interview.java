@@ -1,4 +1,4 @@
-package com.example.demo.test.interview;
+package com.example.demo.interview;
 
 import java.util.UUID;
 

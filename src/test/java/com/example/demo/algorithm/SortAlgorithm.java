@@ -1,4 +1,4 @@
-package com.example.demo.test.algorithm;
+package com.example.demo.algorithm;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

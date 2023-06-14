@@ -1,4 +1,4 @@
-package com.example.demo.test.thread;
+package com.example.demo.thread;
 
 public class ThreadTestFore {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
-package com.example.demo.test.thread;
+package com.example.demo.thread;
 
-public class ThreadOne extends Thread {
+public class ThreadTwo implements Runnable {
 
     @Override
     public void run() {
@@ -10,7 +10,7 @@ public class ThreadOne extends Thread {
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-            System.out.println(Thread.currentThread().getName() + "**********被执行了！");
+            System.out.println(Thread.currentThread().getName() + "++++++++++被执行了！");
         }
     }
 }
